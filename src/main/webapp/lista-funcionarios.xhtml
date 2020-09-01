@@ -7,25 +7,74 @@
         <title>Listar Funcionarios</title>
     </h:head>
     <h:body>
-        
+        <h:form>
+            <h:panelGrid columns="2">
+                <f:facet name="header">
+                    Registo de novo Funcionario
+                </f:facet>
+
+                <h:outputLabel value="Nome"/>
+                <h:inputText value="#{funcionarioCDIBean.funcionario.nome}" size="60"/>
+                <h:outputLabel value="Sobrenome"/>
+                <h:inputText value="#{funcionarioCDIBean.funcionario.sobrenome}" size="60"/>
+                <h:outputLabel value="Departamento"/>
+                <h:selectOneMenu value="#{funcionarioCDIBean.funcionario.departamento}">
+                    <f:selectItem itemValue="contabilidade" itemLabel="Contabilidade"/>
+                    <f:selectItem itemValue="formacao" itemLabel="Formação"/>
+                    <f:selectItem itemValue="higiene" itemLabel="Higiene e Limpeza"/>
+                    <f:selectItem itemValue="vendas" itemLabel="Vendas"/>
+                </h:selectOneMenu>
+                
+                <h:outputLabel value="Salario"/>
+                <h:inputText value="#{funcionarioCDIBean.funcionario.salario}" size="20"/>
+                <h:outputLabel value="Idade"/>
+                <h:inputText value="#{funcionarioCDIBean.funcionario.idade}" size="20"/>
+
+                <h:outputLabel value="Endereço"/>
+                <h:panelGroup>
+                    <h:panelGrid columns="4">
+                        <h:outputLabel value="Casa:"/>
+                        <h:inputText value="#{funcionarioCDIBean.funcionario.casa}" size="30"/>
+
+                        <h:outputLabel value="Rua"/>
+                        <h:inputText value="#{funcionarioCDIBean.funcionario.rua}" size="30"/>
+
+                        <h:outputLabel value="Bairro"/>
+                        <h:inputText value="#{funcionarioCDIBean.funcionario.bairro}" size="30"/>
+                        <h:outputLabel value="Municipio"/>
+                        <h:selectOneMenu value="#{funcionarioCDIBean.funcionario.municipio}">
+                            <f:selectItem itemValue="viana" itemLabel="Viana"/>
+                            <f:selectItem itemValue="cacuaco" itemLabel="Cacuaco"/>
+                            <f:selectItem itemValue="belas" itemLabel="Belas"/>
+                            <f:selectItem itemValue="luanda" itemLabel="Luanda"/>
+                        </h:selectOneMenu>
+
+                    </h:panelGrid>
+                </h:panelGroup>
+
+
+            </h:panelGrid>
+            <h:commandButton value="Guardar" action="#{funcionarioCDIBean.guardar}"/>
+        </h:form>
+
         <h:dataTable value="#{funcionarioCDIBean.funcionarios}" var="funcionario">
             <f:facet name="header"> Lista  dos Funcionarios</f:facet>
-            
+
             <h:column>
                 <f:facet name="header">Nome</f:facet>
-                #{funcionario.nome}
+                    #{funcionario.nome}
             </h:column>
-             <h:column>
+            <h:column>
                 <f:facet name="header">Sobrenome</f:facet>
-                #{funcionario.sobrenome}
+                    #{funcionario.sobrenome}
             </h:column>
-             <h:column>
+            <h:column>
                 <f:facet name="header">Salário</f:facet>
-                #{funcionario.salario}
+                    #{funcionario.salario}
             </h:column>
         </h:dataTable>
-        
-        
+
+
     </h:body>
 </html>
 

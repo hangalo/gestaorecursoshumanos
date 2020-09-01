@@ -4,15 +4,31 @@
       xmlns:h="http://xmlns.jcp.org/jsf/html">
     <h:head>
         <title>RH</title>
+        <h:outputStylesheet library="css" name="bootstrap.min.css"/>
+        <h:outputStylesheet library="css" name="main.css"/>
+        <h:outputScript library="js" name="jquery-3.4.1.min.js"/>
     </h:head>
     <h:body>
-        <h1> Gestão de Recursos Humanos</h1>
-        
-        <h2>
-        <h:link outcome="funcionario" value="Novo Funcionario"/>
-        
-        </h2>
+
+        <div class="jumbotron">
+            <h1 class="display-4">Hello, world!</h1>
+            <p class="lead">This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.</p>
+            <hr class="my-4"/>
+                <p>It uses utility classes for typography and spacing to space content out within the larger container.</p>
+                <a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a>
+        </div>
+
+
+
+        <h1 class="centralizar"> Gestão de Recursos Humanos</h1>
         <h:link outcome="lista-funcionarios" value="Funcionarios"/>
+        <br/>
+        <h:link outcome="lista-departamentos" value="Departamentos"/>
+        <h:form>
+            <h:commandLink action="lista-departamentos" value="Departamentos"/>
+            <br/>
+            <h:commandButton action="lista-departamentos" value="Departamentos"/>
+        </h:form>
     </h:body>
 </html>
 

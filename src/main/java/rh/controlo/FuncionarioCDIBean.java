@@ -23,7 +23,9 @@ public class FuncionarioCDIBean {
     Funcionario funcionario1 = new Funcionario("Joaquim", "Hangalo", "Informatica", 45, 50000.00);
     Funcionario funcionario2 = new Funcionario("Bartolomeu", "Hangalo", "Juridico", 30, 700000.0);
     Funcionario funcionario3 = new Funcionario("Luzia", "Hangalo", "Contabilidade", 60, 80000.00);
-   
+    
+    Funcionario funcionario = new Funcionario();
+    
     List<Funcionario> funcionarios = new ArrayList<>();
 
     @PostConstruct
@@ -39,6 +41,22 @@ public class FuncionarioCDIBean {
 
     public void setFuncionarios(List<Funcionario> funcionarios) {
         this.funcionarios = funcionarios;
+    }
+
+    public Funcionario getFuncionario() {
+        return funcionario;
+    }
+
+    public void setFuncionario(Funcionario funcionario) {
+        this.funcionario = funcionario;
+    }
+
+    
+    
+    public String guardar() {
+        funcionarios.add(funcionario);
+        ///funcionario = new Funcionario();
+        return "lista-funcionarios";
     }
 
 }
