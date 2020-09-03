@@ -5,6 +5,8 @@
  */
 package rh.modelo;
 
+import java.util.Date;
+
 /**
  *
  * @author DGTALE
@@ -13,7 +15,7 @@ public class Funcionario {
     private String nome;
     private String sobrenome;
     private String departamento;
-    private int idade;
+    private Date dataNascimento;
     private double salario;
     private String casa;
     private String rua;
@@ -23,11 +25,11 @@ public class Funcionario {
     public Funcionario() {
     }
 
-    public Funcionario(String nome, String sobrenome, String departamento, int idade, double salario) {
+    public Funcionario(String nome, String sobrenome, String departamento,  double salario) {
         this.nome = nome;
         this.sobrenome = sobrenome;
         this.departamento = departamento;
-        this.idade = idade;
+      
         this.salario = salario;
     }
 
@@ -63,13 +65,15 @@ public class Funcionario {
         this.departamento = departamento;
     }
 
-    public int getIdade() {
-        return idade;
+    public Date getDataNascimento() {
+        return dataNascimento;
     }
 
-    public void setIdade(int idade) {
-        this.idade = idade;
+    public void setDataNascimento(Date dataNascimento) {
+        this.dataNascimento = dataNascimento;
     }
+
+    
 
     public String getCasa() {
         return casa;

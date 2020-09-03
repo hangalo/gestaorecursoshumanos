@@ -5,11 +5,15 @@
  */
 package rh.controlo;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.inject.Named;
 import javax.enterprise.context.RequestScoped;
+import javax.enterprise.context.SessionScoped;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 import rh.modelo.Funcionario;
 
 /**
@@ -17,12 +21,12 @@ import rh.modelo.Funcionario;
  * @author DGTALE
  */
 @Named(value = "funcionarioCDIBean")
-@RequestScoped
-public class FuncionarioCDIBean {
+@SessionScoped
+public class FuncionarioCDIBean implements Serializable{
 
-    Funcionario funcionario1 = new Funcionario("Joaquim", "Hangalo", "Informatica", 45, 50000.00);
-    Funcionario funcionario2 = new Funcionario("Bartolomeu", "Hangalo", "Juridico", 30, 700000.0);
-    Funcionario funcionario3 = new Funcionario("Luzia", "Hangalo", "Contabilidade", 60, 80000.00);
+    Funcionario funcionario1 = new Funcionario("Joaquim", "Hangalo", "Informatica",  50000.00);
+    Funcionario funcionario2 = new Funcionario("Bartolomeu", "Hangalo", "Juridico",  700000.0);
+    Funcionario funcionario3 = new Funcionario("Luzia", "Hangalo", "Contabilidade",  80000.00);
     
     Funcionario funcionario = new Funcionario();
     
@@ -54,8 +58,17 @@ public class FuncionarioCDIBean {
     
     
     public String guardar() {
+       
         funcionarios.add(funcionario);
-        ///funcionario = new Funcionario();
+        
+        FacesContext facesContext = FacesContext.getCurrentInstance();
+        String meuNome="Joaquim Hangalo";
+       
+        FacesMessage facesMessage =
+     new FacesMessage(null, "Funcionario Guardado com sucesso"+" "+meuNome);
+      
+        facesContext.addMessage(null, facesMessage);
+       
         return "lista-funcionarios";
     }
 

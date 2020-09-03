@@ -8,15 +8,18 @@
     </h:head>
     <h:body>
         <h:form>
-            <h:panelGrid columns="2">
-                <f:facet name="header">
-                    Registo de novo Funcionario
-                </f:facet>
-
+                      
+                
+            <h:panelGrid columns="1">
                 <h:outputLabel value="Nome"/>
-                <h:inputText value="#{funcionarioCDIBean.funcionario.nome}" size="60"/>
+                <h:inputText id="nome" value="#{funcionarioCDIBean.funcionario.nome}" required="true" requiredMessage="O campo nome é obrigatório" size="60"/>
+                <h:message for="nome" style="color: #FF0000;"/>
+           </h:panelGrid>
+            <h:panelGrid columns="3">
                 <h:outputLabel value="Sobrenome"/>
-                <h:inputText value="#{funcionarioCDIBean.funcionario.sobrenome}" size="60"/>
+                <h:inputText id="sobrenome" value="#{funcionarioCDIBean.funcionario.sobrenome}" required="true" requiredMessage="O campo sobrenome é obrigatório" size="60"/>
+                 <h:message for="sobrenome"/>
+               </h:panelGrid>  
                 <h:outputLabel value="Departamento"/>
                 <h:selectOneMenu value="#{funcionarioCDIBean.funcionario.departamento}">
                     <f:selectItem itemValue="contabilidade" itemLabel="Contabilidade"/>
@@ -26,9 +29,15 @@
                 </h:selectOneMenu>
                 
                 <h:outputLabel value="Salario"/>
-                <h:inputText value="#{funcionarioCDIBean.funcionario.salario}" size="20"/>
-                <h:outputLabel value="Idade"/>
-                <h:inputText value="#{funcionarioCDIBean.funcionario.idade}" size="20"/>
+                <h:inputText id="salario" value="#{funcionarioCDIBean.funcionario.salario}" size="20">
+                    <f:convertNumber minFractionDigits="2"/>
+                </h:inputText>
+                 <h:message for="salario"/>
+                <h:outputLabel value="Data de nascimento"/>
+                <h:inputText id="data_nascimento" value="#{funcionarioCDIBean.funcionario.dataNascimento}" required="true">
+                    <f:convertDateTime dateStyle="medium" pattern="dd/MM/yyyy"/>
+                </h:inputText>
+                <h:message for="data_nascimento"/>
 
                 <h:outputLabel value="Endereço"/>
                 <h:panelGroup>
@@ -53,7 +62,7 @@
                 </h:panelGroup>
 
 
-            </h:panelGrid>
+            
             <h:commandButton value="Guardar" action="#{funcionarioCDIBean.guardar}"/>
         </h:form>
 
