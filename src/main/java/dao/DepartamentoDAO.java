@@ -5,6 +5,10 @@
  */
 package dao;
 
+import db.util.ConexaoDB;
+import rh.modelo.Departamento;
+import java.sql.*;
+
 /**
  *
  * @author DGTALE
@@ -17,4 +21,24 @@ public class DepartamentoDAO {
     String SELECT_ALL="SELECT * FROM departamento";
     String SELECT_BY_NOME="";
     String SELECT_BY_SIGLA="";
+    
+    
+    public void save(Departamento d){
+    PreparedStatement ps=null;
+    Connection conn =null;
+     
+        try {
+           conn=ConexaoDB.ligarBD();
+           ps = conn.prepareStatement(INSERT);
+           ps.setString(1, d.getSigla());
+           ps.setString(2, d.getNome());
+           ps.executeUpdate();
+        } catch (SQLException e) {
+            
+            System.err.println("Erro ao inserir dados:"
+                    + " DepartamentoDAO:save"+e.getLocalizedMessage());
+        }
+    
+    
+    }
 }
