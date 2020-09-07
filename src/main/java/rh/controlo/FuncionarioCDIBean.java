@@ -24,9 +24,7 @@ import rh.modelo.Funcionario;
 @SessionScoped
 public class FuncionarioCDIBean implements Serializable{
 
-    Funcionario funcionario1 = new Funcionario("Joaquim", "Hangalo", "Informatica",  50000.00);
-    Funcionario funcionario2 = new Funcionario("Bartolomeu", "Hangalo", "Juridico",  700000.0);
-    Funcionario funcionario3 = new Funcionario("Luzia", "Hangalo", "Contabilidade",  80000.00);
+    
     
     Funcionario funcionario = new Funcionario();
     
@@ -34,9 +32,7 @@ public class FuncionarioCDIBean implements Serializable{
 
     @PostConstruct
     public void init() {
-        funcionarios.add(funcionario1);
-        funcionarios.add(funcionario2);
-        funcionarios.add(funcionario3);
+       
     }
 
     public List<Funcionario> getFuncionarios() {
