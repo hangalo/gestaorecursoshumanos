@@ -26,7 +26,7 @@
             <groupId>net.bootsfaces</groupId>
             <artifactId>BootsFacesWeb</artifactId>
             <version>0.7.0</version>
-           
+            
         </dependency>
         <dependency>
             <groupId>javax</groupId>
