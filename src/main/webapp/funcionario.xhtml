@@ -1,7 +1,9 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://xmlns.jcp.org/jsf/html">
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head>
         <title>Registar Novo Funcionario</title>
         <h:outputStylesheet library="css" name="bootstrap.min.css"/>
@@ -9,7 +11,7 @@
         <h:outputScript library="js" name="jquery-3.4.1.min.js"/>
     </h:head>
     <h:body>
-        <h:form id="funcionarioForm">
+        <h:form id="funcionarioForm" style="width: 80%">
             <div>
                 <h:outputLabel value="Nome" for="nome"/>
                 <div>
@@ -20,6 +22,35 @@
                 <h:outputLabel value="Sobrenome" for="sobrenome"/>
                 <div>
                     <h:inputText id="sobrenome" value="#{funcionarioMBean.funcionario.sobrenome}"/>
+                </div>
+            </div>
+            
+            <div>
+                <h:outputLabel value="Sexo" for="sexo"/>
+                <div>
+                    <h:selectOneRadio id="sexo" value="#{funcionarioMBean.funcionario.departamento}" converter="departamentoConverter">
+                        <f:selectItems value="#{funcionarioCDIBean.selectSexos}"/>
+                    </h:selectOneRadio>
+                        
+                </div>
+            </div>
+             <div>
+                <h:outputLabel value="Departamento 01" for="departamento"/>
+                <div>
+                    <h:selectOneMenu id="departamento" value="#{funcionarioMBean.funcionario.departamento}" converter="departamentoConverter">
+                        <f:selectItems value="#{funcionarioCDIBean.selectDepartamentos}"/>
+                    </h:selectOneMenu>
+                        
+                </div>
+            </div>
+            
+             <div>
+                <h:outputLabel value="Departamento 02" for="departamento"/>
+                <div>
+                    <h:selectOneMenu id="departamento2" value="#{funcionarioMBean.funcionario.departamento}" converter="departamentoConverter">
+                        <f:selectItems value="#{funcionarioCDIBean.listaDepartamentos}" var="dp"  itemValue="#{dp}" itemLabel="#{dp.nome}" />
+                    </h:selectOneMenu>
+                        
                 </div>
             </div>
             <div>

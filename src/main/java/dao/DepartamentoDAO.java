@@ -24,7 +24,7 @@ public class DepartamentoDAO {
     String SELECT_BY_NOME = "SELECT * FROM departamento d WHERE d.nome_departamento = ? ";
     String SELECT_BY_SIGLA = "";
 
-    public void save(Departamento d) {
+    public void save(Departamento d){
         PreparedStatement ps = null;
         Connection conn = null;
 
