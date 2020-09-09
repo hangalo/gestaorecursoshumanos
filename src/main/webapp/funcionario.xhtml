@@ -2,15 +2,31 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+       xmlns:b="http://bootsfaces.net/ui"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head>
-        <title>Registar Novo Funcionario</title>
-        <h:outputStylesheet library="css" name="bootstrap.min.css"/>
-        <h:outputStylesheet library="css" name="main.css"/>
-        <h:outputScript library="js" name="jquery-3.4.1.min.js"/>
+        <title>Registo de Departamento</title>
+        
     </h:head>
-    <h:body>
+    
+    <h:body style="padding: 60px;">
+        <b:navBar brand="RH" brandHref="#" fixed="top" inverse="true">
+            <b:navbarLinks>
+                <b:navLink value="Home" href="#"></b:navLink>
+                <b:navLink value="About" href="#about"></b:navLink>
+                <b:navLink value="Contact" href="#contact"></b:navLink>
+            </b:navbarLinks>
+        </b:navBar>
+        <b:container>
+            <b:jumbotron>
+                <h1>Gestão de Departamentos</h1>
+                <p> Use this JSF document as a way to quickly start any new project.</p>
+                <p> All you get is this text and a mostly barebone JSF document.</p>
+                <p>
+                    <a href="#" class="btn btn-lg btn-info">View Page Source »</a>
+                </p>
+            </b:jumbotron>
+        </b:container>
         <h:form id="funcionarioForm" style="width: 80%">
             <div>
                 <h:outputLabel value="Nome" for="nome"/>

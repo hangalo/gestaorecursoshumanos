@@ -5,8 +5,8 @@
        xmlns:b="http://bootsfaces.net/ui"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head>
-        <title>Registo de Departamento</title>
-       
+        <title>Registo de Faltas</title>
+        
     </h:head>
     
     <h:body style="padding: 60px;">
@@ -19,7 +19,7 @@
         </b:navBar>
         <b:container>
             <b:jumbotron>
-                <h1>Gestão de Departamentos</h1>
+                <h1>Gestão de Ausências</h1>
                 <p> Use this JSF document as a way to quickly start any new project.</p>
                 <p> All you get is this text and a mostly barebone JSF document.</p>
                 <p>
@@ -27,30 +27,8 @@
                 </p>
             </b:jumbotron>
         </b:container>
-    
-        <h:form>
-            <h:panelGrid columns="2">
-                <h:outputLabel value="Sigla"/>
-                <h:inputText value="#{departamentoCDIBean.departamento.sigla}"/>
-                <h:outputLabel value="Nome"/>
-                <h:inputText value="#{departamentoCDIBean.departamento.nome}"/>
-                
-            </h:panelGrid>
-            <h:commandButton value="Guardar" action="#{departamentoCDIBean.save}"/>
-        </h:form>
         
-        <h:form style="width: 80%">
-            <h:dataTable value="#{departamentoCDIBean.departamentos}" var="dep" class="table table-striped" >
-                <h:column>
-                    <f:facet name="header">Sigla</f:facet>
-                    #{dep.sigla}
-                </h:column>
-                <h:column>
-                    <f:facet name="header">Nome</f:facet>
-                    #{dep.nome}
-                </h:column>
-            </h:dataTable>
-        </h:form>
+
     </h:body>
 </html>
 
