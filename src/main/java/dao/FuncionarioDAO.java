@@ -11,6 +11,8 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 import rh.modelo.Funcionario;
+import rh.modelo.Municipio;
+import rh.modelo.Sexo;
 
 /**
  *
@@ -18,25 +20,33 @@ import rh.modelo.Funcionario;
  */
 public class FuncionarioDAO {
 
-    String INSERT = "INSERT INTO departamento VALUES(?, ?)";
+    /*
+   
+    
+     */
+    String INSERT = "INSERT INTO funcionario(nome, sobrenome, data_nascimento, rua, casa, bairro, sexo, id_municipio) VALUES(?, ?, ?, ?, ?, ?, ?,?)";
     String UPDATE = "";
     String DELETE = "";
-    String SELECT_ALL = "SELECT * FROM departamento";
-    String SELECT_BY_NOME = "SELECT * FROM departamento d WHERE d.nome_departamento = ? ";
-    String SELECT_BY_SIGLA = "";
+    String SELECT_ALL = "SELECT id_funcionario, nome, sobrenome, data_nascimento, rua, casa, bairro, sexo, id_municipio FROM  funcionario";
+    String SELECT_BY_NOME = "SELECT id_funcionario, nome, sobrenome, data_nascimento, rua, casa, bairro, sexo, id_municipio FROM  funcionario f WHERE f.nome LIKE ? ";
+    String SELECT_BY_NOME_SOBRENOME = "SELECT id_funcionario, nome, sobrenome, data_nascimento, rua, casa, bairro, sexo, id_municipio FROM  funcionario f WHERE f.nome = ? AND f.sobrenome = ?";
+    String SELECT_BY_DATA_NASCIMENTO = "SELECT id_funcionario, nome, sobrenome, data_nascimento, rua, casa, bairro, sexo, id_municipio FROM  funcionario f WHERE f.data_nascimento BETWEEN ? AND ?";
 
     public void save(Funcionario f) {
         PreparedStatement ps = null;
         Connection conn = null;
-
+    
         try {
             conn = ConexaoDB.ligarBD();
             ps = conn.prepareStatement(INSERT);
-     
-            ps.setDouble(4, f.getSalario());
-            ps.setDate(5, new java.sql.Date(f.getDataNascimento().getTime()));
-            ps.setString(6, f.getDepartamento().getSigla());
-            ps.setInt(7, f.getMunicipio().getIdMunicipio());
+            ps.setString(1, f.getNome());
+            ps.setString(2, f.getSobrenome());
+            ps.setDate(3, new java.sql.Date(f.getDataNascimento().getTime()));
+            ps.setString(4, f.getRua());
+            ps.setString(5, f.getCasa());
+            ps.setString(6, f.getBairro());
+            ps.setString(7, f.getSexo().getAbreviatua());
+            ps.setInt(8, f.getMunicipio().getIdMunicipio());
             ps.executeUpdate();
         } catch (SQLException e) {
 
@@ -46,57 +56,67 @@ public class FuncionarioDAO {
 
     }
 
-    public List<Departamento> listaDepartamentos() {
-        List<Departamento> lista = new ArrayList<>();
-         PreparedStatement ps = null;
-         Connection conn = null;
-         ResultSet rs = null;
-         try{
-             conn = ConexaoDB.ligarBD();
-             ps = conn.prepareStatement(SELECT_ALL);
-             rs =ps.executeQuery();
-             while(rs.next()){
-             Departamento d = new Departamento();
-             d.setSigla(rs.getString(1));
-             d.setNome(rs.getString(2));
-             lista.add(d);
-             }
-             
-         }catch(SQLException ex){
-             System.err.println("Erro ao ler dados:"
-                     + "DepartamentoDAO:"
-                     + "listaDepartamentos"+ex.getLocalizedMessage());
-         }
-        
+    public List<Funcionario> listaDepartamentos() {
+        List<Funcionario> lista = new ArrayList<>();
+        PreparedStatement ps = null;
+        Connection conn = null;
+        ResultSet rs = null;
+        try {
+            conn = ConexaoDB.ligarBD();
+            ps = conn.prepareStatement(SELECT_ALL);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                /*nome, sobrenome, data_nascimento, 
+                rua, casa, bairro, sexo, id_municipio*/
+                Funcionario f = new Funcionario();
+                f.setId(rs.getInt(1));
+                f.setNome(rs.getString("nome"));
+                f.setSobrenome(rs.getString("sobrenome"));
+                f.setDataNascimento(rs.getDate("data_nascimento"));
+                f.setRua(rs.getString(5));
+                f.setCasa(rs.getString(6));
+                f.setBairro(rs.getString(7));
+                f.setSexo(Sexo.getAbreviatura(rs.getString(8)));
                 
+                Municipio municipio = new Municipio();
+                municipio.setIdMunicipio(rs.getInt("id_municipio"));
+                f.setMunicipio(municipio);
+               
+                lista.add(f);
+            }
+
+        } catch (SQLException ex) {
+            System.err.println("Erro ao ler dados:"
+                    + "DepartamentoDAO:"
+                    + "listaDepartamentos" + ex.getLocalizedMessage());
+        }
+
         return lista;
     }
 
-    
-     public List<Departamento> listaDepartamentoByNome(String nome) {
+    public List<Departamento> listaDepartamentoByNome(String nome) {
         List<Departamento> lista = new ArrayList<>();
-         PreparedStatement ps = null;
-         Connection conn = null;
-         ResultSet rs = null;
-         try{
-             conn = ConexaoDB.ligarBD();
-             ps = conn.prepareStatement(SELECT_BY_NOME);
-             ps.setString(1, nome);
-             rs =ps.executeQuery();
-             while(rs.next()){
-             Departamento d = new Departamento();
-             d.setSigla(rs.getString(1));
-             d.setNome(rs.getString(2));
-             lista.add(d);
-             }
-             
-         }catch(SQLException ex){
-             System.err.println("Erro ao ler dados:"
-                     + "DepartamentoDAO:"
-                     + "listaDepartamentos"+ex.getLocalizedMessage());
-         }
-        
-                
+        PreparedStatement ps = null;
+        Connection conn = null;
+        ResultSet rs = null;
+        try {
+            conn = ConexaoDB.ligarBD();
+            ps = conn.prepareStatement(SELECT_BY_NOME);
+            ps.setString(1, nome);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                Departamento d = new Departamento();
+                d.setSigla(rs.getString(1));
+                d.setNome(rs.getString(2));
+                lista.add(d);
+            }
+
+        } catch (SQLException ex) {
+            System.err.println("Erro ao ler dados:"
+                    + "DepartamentoDAO:"
+                    + "listaDepartamentos" + ex.getLocalizedMessage());
+        }
+
         return lista;
     }
 }

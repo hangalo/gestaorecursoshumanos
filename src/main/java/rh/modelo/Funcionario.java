@@ -12,27 +12,29 @@ import java.util.Date;
  * @author DGTALE
  */
 public class Funcionario {
+    private Integer id;
     private String nome;
     private String sobrenome;
-    private Departamento departamento;
     private Date dataNascimento;
-    private double salario;
     private String casa;
     private String rua;
     private String bairro;
+    private Sexo sexo;
     private Municipio municipio;
 
     public Funcionario() {
     }
 
-   
-    public double getSalario() {
-        return salario;
+    public Integer getId() {
+        return id;
     }
 
-    public void setSalario(double salario) {
-        this.salario = salario;
+    public void setId(Integer id) {
+        this.id = id;
     }
+
+   
+   
 
     public String getNome() {
         return nome;
@@ -86,14 +88,15 @@ public class Funcionario {
         this.bairro = bairro;
     }
 
-    public Departamento getDepartamento() {
-        return departamento;
+    public Sexo getSexo() {
+        return sexo;
     }
 
-    public void setDepartamento(Departamento departamento) {
-        this.departamento = departamento;
+    public void setSexo(Sexo sexo) {
+        this.sexo = sexo;
     }
 
+ 
     public Municipio getMunicipio() {
         return municipio;
     }
