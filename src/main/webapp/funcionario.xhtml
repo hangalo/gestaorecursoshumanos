@@ -2,13 +2,14 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-       xmlns:b="http://bootsfaces.net/ui"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
+      xmlns:b="http://bootsfaces.net/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:a ="http://xmlns.jcp.org/jsf/passthrough">
     <h:head>
         <title>RH - Registo de Departamento</title>
-        
+
     </h:head>
-    
+
     <h:body style="padding: 60px;">
         <b:navBar brand="RH" brandHref="#" fixed="top" inverse="true">
             <b:navbarLinks>
@@ -20,62 +21,64 @@
         <b:container>
             <b:jumbotron>
                 <h1>Gestão de Departamentos</h1>
-                <p> Use this JSF document as a way to quickly start any new project.</p>
-                <p> All you get is this text and a mostly barebone JSF document.</p>
+
                 <p>
-                    <a href="#" class="btn btn-lg btn-info">View Page Source »</a>
+                    <a href="index.jsf" class="btn btn-lg btn-info">RH»</a>
                 </p>
             </b:jumbotron>
         </b:container>
+        
+        
         <h:form id="funcionarioForm" style="width: 80%">
-            <div>
-                <h:outputLabel value="Nome" for="nome"/>
-                <div>
-                    <h:inputText  id="nome" value="#{funcionarioMBean.funcionario.nome}"/>
-                </div>
-            </div>
-            <div>
-                <h:outputLabel value="Sobrenome" for="sobrenome"/>
-                <div>
-                    <h:inputText id="sobrenome" value="#{funcionarioMBean.funcionario.sobrenome}"/>
-                </div>
-            </div>
-            
-            <div>
-                <h:outputLabel value="Sexo" for="sexo"/>
-                <div>
-                    <h:selectOneRadio id="sexo" value="#{funcionarioMBean.funcionario.departamento}" converter="departamentoConverter">
-                        <f:selectItems value="#{funcionarioCDIBean.selectSexos}"/>
-                    </h:selectOneRadio>
-                        
-                </div>
-            </div>
-             <div>
-                <h:outputLabel value="Departamento 01" for="departamento"/>
-                <div>
-                    <h:selectOneMenu id="departamento" value="#{funcionarioMBean.funcionario.departamento}" converter="departamentoConverter">
-                        <f:selectItems value="#{funcionarioCDIBean.selectDepartamentos}"/>
-                    </h:selectOneMenu>
-                        
-                </div>
-            </div>
-            
-             <div>
-                <h:outputLabel value="Departamento 02" for="departamento"/>
-                <div>
-                    <h:selectOneMenu id="departamento2" value="#{funcionarioMBean.funcionario.departamento}" converter="departamentoConverter">
-                        <f:selectItems value="#{funcionarioCDIBean.listaDepartamentos}" var="dp"  itemValue="#{dp}" itemLabel="#{dp.nome}" />
-                    </h:selectOneMenu>
-                        
-                </div>
-            </div>
-            <div>
-                <div>
-                    <h:commandButton value="Guardar" action="#{funcionarioMBean.guardar}"/>
-                </div>
+          
+            <h:panelGrid columns="2">
+                <h:outputLabel value="Nome"/>
+                <h:inputText  id="nome" value="#{funcionarioCDIBean.funcionario.nome}" />
+                <h:outputLabel value="Sobrenome" />
+                <h:inputText id="sobrenome" value="#{funcionarioCDIBean.funcionario.sobrenome}"/>
+                <h:outputLabel value="Data nascimento" />
+                <h:inputText id="datanasciemento" value="#{funcionarioCDIBean.funcionario.dataNascimento}" label="Data de Nascimento">
+                    <f:convertDateTime pattern="dd/MM/yyyy"/>
+                </h:inputText>
 
-            </div>
+                <h:outputLabel value="Sexo" />
+                <h:selectOneRadio id="sexo" value="#{funcionarioCDIBean.funcionario.sexo}" >
+                    <f:selectItems value="#{funcionarioCDIBean.selectSexos}"/>
+                </h:selectOneRadio>
 
+
+
+
+
+                <h:outputLabel value="Casa"/>
+
+                <h:inputText id="casa" value="#{funcionarioCDIBean.funcionario.casa}"/>
+
+
+
+
+                <h:outputLabel value="Rua" />
+
+                <h:inputText id="rua" value="#{funcionarioCDIBean.funcionario.rua}"/>
+
+
+
+                <h:outputLabel value="Bairro"/>
+
+                <h:inputText id="bairro" value="#{funcionarioCDIBean.funcionario.bairro}"/>
+
+
+
+                <h:outputLabel value="Municipio" />
+
+                <h:selectOneMenu id="municipio" value="#{funcionarioCDIBean.funcionario.municipio}" converter="municipioConverter">
+                    <f:selectItems value="#{municipioBean.selectMunicipios}"/>
+                </h:selectOneMenu>
+
+
+                <h:commandButton value="Guardar" action="#{funcionarioCDIBean.guardar}" type="submit" class="btn btn-primary"/>
+
+            </h:panelGrid>
         </h:form>
 
     </h:body>

@@ -6,6 +6,7 @@
 package rh.controlo;
 
 import dao.DepartamentoDAO;
+import dao.FuncionarioDAO;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -24,17 +25,20 @@ import rh.modelo.Sexo;
  *
  * @author DGTALE
  */
-@Named(value = "funcionarioCDIBean")
+    @Named(value = "funcionarioCDIBean")
 @SessionScoped
 public class FuncionarioCDIBean implements Serializable {
 
-    Funcionario funcionario = new Funcionario();
-    DepartamentoDAO dao = new DepartamentoDAO();
+    Funcionario funcionario;
+    DepartamentoDAO departamentoDao = new DepartamentoDAO();
+    FuncionarioDAO funcionarioDAO = new FuncionarioDAO();
     List<Funcionario> funcionarios;
 
     @PostConstruct
     public void inicizalizar() {
         funcionarios = new ArrayList<>();
+        funcionarios = funcionarioDAO.listaTodosFuncionarios();
+        funcionario = new Funcionario();
     }
 
     public List<Funcionario> getFuncionarios() {
@@ -55,7 +59,7 @@ public class FuncionarioCDIBean implements Serializable {
 
     public List<SelectItem> getSelectDepartamentos() {
         List<SelectItem> lista = new ArrayList<>();
-        for (Departamento d : dao.listaDepartamentos()) {
+        for (Departamento d : departamentoDao.listaDepartamentos()) {
             lista.add(new SelectItem(d, d.getNome()));
         }
         return lista;
@@ -72,24 +76,24 @@ public class FuncionarioCDIBean implements Serializable {
 
     public List<Departamento> getListaDepartamentos() {
         List<Departamento> lista = new ArrayList<>();
-        lista = dao.listaDepartamentos();
+        lista = departamentoDao.listaDepartamentos();
         return lista;
 
     }
 
     public String guardar() {
 
-        funcionarios.add(funcionario);
-
+        
+        funcionarioDAO.save(funcionario);
         FacesContext facesContext = FacesContext.getCurrentInstance();
-        String meuNome = "Joaquim Hangalo";
+        String operacao = "Guardar";
 
         FacesMessage facesMessage
-                = new FacesMessage(null, "Funcionario Guardado com sucesso" + " " + meuNome);
+                = new FacesMessage(null, "Funcionario Guardado com sucesso" + " " + operacao);
 
         facesContext.addMessage(null, facesMessage);
 
-        return "lista-funcionarios";
+        return "funcionario";
     }
 
 }

@@ -5,6 +5,8 @@
  */
 package rh.modelo;
 
+import java.util.Objects;
+
 /**
  *
  * @author DGTALE
@@ -36,6 +38,36 @@ public class Municipio {
 
     public void setProvincia(Provincia provincia) {
         this.provincia = provincia;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 41 * hash + Objects.hashCode(this.idMunicipio);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Municipio other = (Municipio) obj;
+        if (!Objects.equals(this.idMunicipio, other.idMunicipio)) {
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    public String toString() {
+        return  this.nomeMunicipio;
     }
     
     

@@ -56,7 +56,7 @@ public class FuncionarioDAO {
 
     }
 
-    public List<Funcionario> listaDepartamentos() {
+    public List<Funcionario> listaTodosFuncionarios() {
         List<Funcionario> lista = new ArrayList<>();
         PreparedStatement ps = null;
         Connection conn = null;
@@ -87,14 +87,14 @@ public class FuncionarioDAO {
 
         } catch (SQLException ex) {
             System.err.println("Erro ao ler dados:"
-                    + "DepartamentoDAO:"
-                    + "listaDepartamentos" + ex.getLocalizedMessage());
+                    + "FuncionarioDAO:"
+                    + "listaTodosFuncionarios" + ex.getLocalizedMessage());
         }
 
         return lista;
     }
 
-    public List<Departamento> listaDepartamentoByNome(String nome) {
+    public List<Departamento> listaFuncionariosByNome(String nome) {
         List<Departamento> lista = new ArrayList<>();
         PreparedStatement ps = null;
         Connection conn = null;
@@ -113,8 +113,8 @@ public class FuncionarioDAO {
 
         } catch (SQLException ex) {
             System.err.println("Erro ao ler dados:"
-                    + "DepartamentoDAO:"
-                    + "listaDepartamentos" + ex.getLocalizedMessage());
+                    + "FuncionarioDAO:"
+                    + "listaFuncionariosByNome" + ex.getLocalizedMessage());
         }
 
         return lista;
