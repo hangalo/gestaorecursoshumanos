@@ -23,11 +23,6 @@
             <version>8.0.21</version>
         </dependency>
         <dependency>
-            <groupId>net.bootsfaces</groupId>
-            <artifactId>BootsFacesWeb</artifactId>
-            <version>0.7.0</version>           
-        </dependency>
-        <dependency>
             <groupId>org.primefaces</groupId>
             <artifactId>primefaces</artifactId>
             <version>8.0</version>
@@ -35,9 +30,10 @@
         <dependency>
             <groupId>net.bootsfaces</groupId>
             <artifactId>bootsfaces</artifactId>
-            <version>0.7.0</version>
+            <version>1.5.0</version>
+            <scope>compile</scope>
         </dependency>
-        
+                  
         <dependency>
             <groupId>javax</groupId>
             <artifactId>javaee-api</artifactId>
@@ -47,7 +43,7 @@
         
     </dependencies>
     
-     <build>
+    <build>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>

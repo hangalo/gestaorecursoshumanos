@@ -19,7 +19,7 @@ import rh.modelo.Provincia;
  */
 public class MunicipioDAO {
 
-    String SELECT_ALL = "SELECT * FROM municipio";
+    String SELECT_ALL = "SELECT id_municipio, nome_municipio, nome_provincia FROM municipio m INNER JOIN provincia p ON m.id_provincia = p.id_provincia";
     String SELECT_BY_NOME = "SELECT id_municipio, nome_municipio, nome_provincia FROM municipio m INNER JOIN provincia p ON m.id_provincia = p.id_provincia  WHERE m.nome_municipio LIKE ? ";
     String SELECT_BY_PROVINCIA = "SELECT id_municipio, nome_municipio, nome_provincia FROM municipio m INNER JOIN provincia p ON m.id_provincia = p.id_provincia  WHERE P.nome_provincia = ? ";
 
@@ -36,6 +36,10 @@ public class MunicipioDAO {
                 Municipio m = new Municipio();
                 m.setIdMunicipio(rs.getInt("id_municipio"));
                 m.setNomeMunicipio(rs.getString("nome_municipio"));
+                 Provincia p = new Provincia();
+                p.setNomeProvincia(rs.getString("nome_provincia"));
+                
+                m.setProvincia(p);
                 lista.add(m);
             }
 
@@ -56,14 +60,57 @@ public class MunicipioDAO {
         try {
             conn = ConexaoDB.ligarBD();
             ps = conn.prepareStatement(SELECT_BY_PROVINCIA);
+            
             ps.setString(1, nomeProvincia);
+
+            
             rs = ps.executeQuery();
             while (rs.next()) {
                 Municipio m = new Municipio();
                 m.setIdMunicipio(rs.getInt("id_municipio"));
                 m.setNomeMunicipio(rs.getString("nome_municipio"));
+              
                 Provincia p = new Provincia();
                 p.setNomeProvincia(rs.getString("nome_provincia"));
+                
+                m.setProvincia(p);
+                
+                lista.add(m);
+            }
+
+        } catch (SQLException ex) {
+            System.err.println("Erro ao ler dados:"
+                    + "MunicipioDAO:"
+                    + "listaMunicipiosByProvincia" + ex.getLocalizedMessage());
+        }
+
+        return lista;
+    }
+    
+    
+    public List<Municipio> listaMunicipiosByNome(String letras) {
+        List<Municipio> lista = new ArrayList<>();
+        PreparedStatement ps = null;
+        Connection conn = null;
+        ResultSet rs = null;
+        try {
+            conn = ConexaoDB.ligarBD();
+            ps = conn.prepareStatement(SELECT_BY_NOME);
+            
+            ps.setString(1, "%"+letras +"%");
+
+            
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                Municipio m = new Municipio();
+                m.setIdMunicipio(rs.getInt("id_municipio"));
+                m.setNomeMunicipio(rs.getString("nome_municipio"));
+              
+                Provincia p = new Provincia();
+                p.setNomeProvincia(rs.getString("nome_provincia"));
+                
+                m.setProvincia(p);
+                
                 lista.add(m);
             }
 

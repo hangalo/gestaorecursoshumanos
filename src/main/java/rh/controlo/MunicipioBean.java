@@ -25,9 +25,14 @@ public class MunicipioBean {
     MunicipioDAO dao = new MunicipioDAO();
     Municipio municipio = new Municipio();
     List<Municipio> municipios;
+    
     List<Municipio> municipiosProvincia;
+    
+    List<Municipio> municipiosComLetras;
 
     String provincia;
+    
+    String letrasNomeMunicipio;
 
     @PostConstruct
     public void inicizalizar() {
@@ -48,6 +53,14 @@ public class MunicipioBean {
 
     }
 
+    public List<Municipio> getMunicipiosPorLetra(){
+    municipiosComLetras = new ArrayList<>();
+    municipiosComLetras = dao.listaMunicipiosByNome(letrasNomeMunicipio);
+    return municipiosComLetras;
+    
+    
+    }
+    
     public List<SelectItem> getSelectMunicipios() {
         List<SelectItem> lista = new ArrayList<>();
         for (Municipio m : dao.listaMunicipios()) {
@@ -70,6 +83,14 @@ public class MunicipioBean {
 
     public void setMunicipio(Municipio municipio) {
         this.municipio = municipio;
+    }
+
+    public String getLetrasNomeMunicipio() {
+        return letrasNomeMunicipio;
+    }
+
+    public void setLetrasNomeMunicipio(String letrasNomeMunicipio) {
+        this.letrasNomeMunicipio = letrasNomeMunicipio;
     }
 
 }

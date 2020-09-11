@@ -24,10 +24,9 @@
                 </p>
             </b:jumbotron>
         </b:container>
-       
-        
+               
         <h:form id="form_pesquisa_por_provincia" style="width: 80%; margin-left: 24px;">
-            <h:inputText id="pesquia_por_provincia" value="#{municipioBean.provincia}" rendered="true" requiredMessage="Campo obrigarorio"/>
+            <h:inputText id="pesquia_por_provincia" value="#{municipioBean.provincia}" required="true" requiredMessage="Campo obrigarorio"/>
             <h:message for="pesquia_por_provincia"/>
             <b:commandButton look="info" value="Pesquisar..."/>
         </h:form>
