@@ -8,9 +8,9 @@
         <title>Funcionarios</title>
     </h:head>
     <h:body>
-        <h:form>
-            <h:dataTable value="#{funcionarioCDIBean.funcionarios}" var="f" >
-                <f:facet name="header"> Lista geral</f:facet>
+        <h:form style="width: 80%; margin: 20px">
+            <h:dataTable value="#{funcionarioCDIBean.funcionarios}" var="f" border="1" >
+                <f:facet name="header"> Funcionarios: Lista geral</f:facet>
                 <h:column>
                     <f:facet name="header">Nome</f:facet>
                     <h:outputText value="#{f.nome}"/>
@@ -31,8 +31,10 @@
                 </h:column>
 
                 <f:facet name="footer">
-                    <h3>   <h:outputText value="Total:"/></h3>
-                    <h:outputText value="#{funcionarioCDIBean.funcionarios.size()}"/>
+                    <h3> 
+                        <h:outputText value="Total:"/>
+                        <h:outputText value="#{funcionarioCDIBean.funcionarios.size()}"/>
+                    </h3>
                 </f:facet>
 
             </h:dataTable>
