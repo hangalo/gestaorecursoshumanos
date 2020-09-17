@@ -29,6 +29,23 @@
                     <f:facet name="header">Municipio</f:facet>
                     <h:outputText value="#{f.municipio.idMunicipio}"/>
                 </h:column>
+                
+                
+                <h:column>
+                    <f:facet name="header">Eliminar</f:facet>
+                    <h:commandLink value="Eliminar" action="#{funcionarioCDIBean.eliminar}">
+                        <f:setPropertyActionListener target="#{funcionarioCDIBean.funcionario}" value="#{f}"/>
+                    </h:commandLink>
+                </h:column>
+                
+                 <h:column>
+                    <f:facet name="header">Editar</f:facet>
+                    <h:commandLink value="Editar" action="#{funcionarioCDIBean.prepararEditar}">
+                     <f:setPropertyActionListener target="#{funcionarioCDIBean.funcionario}" value="#{f}"/>
+                    
+                    </h:commandLink>
+                       
+                </h:column>
 
                 <f:facet name="footer">
                     <h3> 
@@ -38,7 +55,7 @@
                 </f:facet>
 
             </h:dataTable>
-            <p><b:button outcome="funcionario" value="Novo»" class ="btn btn-primary btn-md"/></p>
+            <p><b:button outcome="inserir-funcionario" value="Novo»" class ="btn btn-primary btn-md"/></p>
         </h:form>
 
     </h:body>

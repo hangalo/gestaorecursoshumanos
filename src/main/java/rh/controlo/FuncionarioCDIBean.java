@@ -81,9 +81,9 @@ public class FuncionarioCDIBean implements Serializable {
 
     }
 
+    // CRUD - Create , Read , Update , Delete
+    
     public String guardar() {
-
-        
         funcionarioDAO.save(funcionario);
         FacesContext facesContext = FacesContext.getCurrentInstance();
         String operacao = "Guardar";
@@ -92,8 +92,40 @@ public class FuncionarioCDIBean implements Serializable {
                 = new FacesMessage(null, "Funcionario Guardado com sucesso" + " " + operacao);
 
         facesContext.addMessage(null, facesMessage);
+        
+        funcionario = new Funcionario();
+        
+        return "inserir-funcionario";
+    }
+    
+     public String editar() {
+        funcionarioDAO.edit(funcionario);
+        FacesContext facesContext = FacesContext.getCurrentInstance();
+        String operacao = "Editar";
 
+        FacesMessage facesMessage
+                = new FacesMessage(null, " Dados do funcionario editados com sucesso" + " " + operacao);
+
+        facesContext.addMessage(null, facesMessage);
+        funcionario = new Funcionario();
         return "funcionario";
     }
 
+     public String prepararEditar(){
+     
+         return "editar-funcionario";
+     }
+     
+      public String eliminar() {
+        funcionarioDAO.delete(funcionario);
+        FacesContext facesContext = FacesContext.getCurrentInstance();
+        String operacao = "Eliminar";
+
+        FacesMessage facesMessage
+                = new FacesMessage(null, " Dados do funcionario eliminados com sucesso" + " " + operacao);
+
+        facesContext.addMessage(null, facesMessage);
+       
+        return "lista-funcionarios";
+    }
 }

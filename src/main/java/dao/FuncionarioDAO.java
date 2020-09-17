@@ -23,10 +23,13 @@ public class FuncionarioDAO {
     /*
    
     
+
+
+    
      */
     String INSERT = "INSERT INTO funcionario(nome, sobrenome, data_nascimento, rua, casa, bairro, sexo, id_municipio) VALUES(?, ?, ?, ?, ?, ?, ?,?)";
-    String UPDATE = "";
-    String DELETE = "";
+    String UPDATE = "UPDATE funcionario SET nome = ?, sobrenome = ?, data_nascimento = ?, rua = ?, casa = ?, bairro = ?, sexo = ?, id_municipio = ? WHERE id_funcionario = ?";
+    String DELETE = "DELETE FROM funcionario WHERE id_funcionario = ?";
     String SELECT_ALL = "SELECT id_funcionario, nome, sobrenome, data_nascimento, rua, casa, bairro, sexo, id_municipio FROM  funcionario";
     String SELECT_BY_NOME = "SELECT id_funcionario, nome, sobrenome, data_nascimento, rua, casa, bairro, sexo, id_municipio FROM  funcionario f WHERE f.nome LIKE ? ";
     String SELECT_BY_NOME_SOBRENOME = "SELECT id_funcionario, nome, sobrenome, data_nascimento, rua, casa, bairro, sexo, id_municipio FROM  funcionario f WHERE f.nome = ? AND f.sobrenome = ?";
@@ -55,7 +58,49 @@ public class FuncionarioDAO {
         }
 
     }
+    
+     public void edit(Funcionario f) {
+        PreparedStatement ps = null;
+        Connection conn = null;
+    
+        try {
+            conn = ConexaoDB.ligarBD();
+            ps = conn.prepareStatement(UPDATE);
+            ps.setString(1, f.getNome());
+            ps.setString(2, f.getSobrenome());
+            ps.setDate(3, new java.sql.Date(f.getDataNascimento().getTime()));
+            ps.setString(4, f.getRua());
+            ps.setString(5, f.getCasa());
+            ps.setString(6, f.getBairro());
+            ps.setString(7, f.getSexo().getAbreviatua());
+            ps.setInt(8, f.getMunicipio().getIdMunicipio());
+            ps.setInt(9, f.getId());
+            ps.executeUpdate();
+        } catch (SQLException e) {
 
+            System.err.println("Erro ao actualizar dados:"
+                    + " DepartamentoDAO:save" + e.getLocalizedMessage());
+        }
+
+    }
+
+      public void delete(Funcionario f) {
+        PreparedStatement ps = null;
+        Connection conn = null;
+    
+        try {
+            conn = ConexaoDB.ligarBD();
+            ps = conn.prepareStatement(DELETE);
+            ps.setInt(1, f.getId());
+            ps.executeUpdate();
+        } catch (SQLException e) {
+
+            System.err.println("Erro ao eliminar dados:"
+                    + " DepartamentoDAO:save" + e.getLocalizedMessage());
+        }
+
+    }
+     
     public List<Funcionario> listaTodosFuncionarios() {
         List<Funcionario> lista = new ArrayList<>();
         PreparedStatement ps = null;
