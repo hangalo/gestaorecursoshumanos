@@ -27,10 +27,10 @@
                 </p>
             </b:jumbotron>
         </b:container>
-        
-        
+
+
         <h:form id="funcionarioForm" style="width: 80%">
-          
+            <h:messages showDetail="true" showSummary="true"/>
             <h:panelGrid columns="2">
                 <h:outputLabel value="Nome"/>
                 <h:inputText  id="nome" value="#{funcionarioCDIBean.funcionario.nome}" />
@@ -69,11 +69,27 @@
 
 
 
-                <h:outputLabel value="Municipio" />
 
-                <h:selectOneMenu id="municipio" value="#{funcionarioCDIBean.funcionario.municipio}" converter="municipioConverter">
-                    <f:selectItems value="#{municipioBean.selectMunicipios}"/>
+
+                <h:outputLabel value="Provincia: *" />
+                <h:selectOneMenu id="provincia" value="#{localidadeBean.provincia}" required="true" requiredMessage="Campo obrigatório" converter="provinciaConverter" style="width: 250px;" >
+                    <f:selectItem itemLabel="Selecione" />
+                    <f:selectItems value="#{localidadeBean.selectProvincias}" />
+                    <f:ajax render="municipio" event="change" listener="#{localidadeBean.listaMunicipiosDaProvincia}" />
                 </h:selectOneMenu>
+
+
+                <h:outputLabel value="Municipio: *" />
+                <h:selectOneMenu id="municipio" value="#{funcionarioCDIBean.funcionario.municipio}" converter="municipioConverter" required="true" requiredMessage="Campo obrigatório" style="width: 250px;" >
+                    <f:selectItem itemLabel="Selecione" />
+                    <f:selectItems value="#{localidadeBean.municipios}" var="m" itemValue="#{m}" itemLabel="#{m.nomeMunicipio}" />
+                </h:selectOneMenu>
+
+
+
+
+
+
 
 
                 <h:commandButton value="Guardar" action="#{funcionarioCDIBean.guardar}" type="submit" class="btn btn-primary"/>

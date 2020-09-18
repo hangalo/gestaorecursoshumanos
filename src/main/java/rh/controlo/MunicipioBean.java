@@ -11,8 +11,10 @@ import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.inject.Named;
 import javax.enterprise.context.RequestScoped;
+import javax.faces.event.AjaxBehaviorEvent;
 import javax.faces.model.SelectItem;
 import rh.modelo.Municipio;
+import rh.modelo.Provincia;
 
 /**
  *
@@ -30,9 +32,11 @@ public class MunicipioBean {
     
     List<Municipio> municipiosComLetras;
 
-    String provincia;
+    String nomeDaProvincia;
     
     String letrasNomeMunicipio;
+    
+    Provincia provincia = new Provincia();
 
     @PostConstruct
     public void inicizalizar() {
@@ -48,7 +52,7 @@ public class MunicipioBean {
 
     public List<Municipio> getListaMunicipiosDaProvincia() {
         municipiosProvincia = new ArrayList<>();
-        municipiosProvincia = dao.listaMunicipiosByProvincia(provincia);
+        municipiosProvincia = dao.listaMunicipiosByProvincia(nomeDaProvincia);
         return municipiosProvincia;
 
     }
@@ -69,12 +73,15 @@ public class MunicipioBean {
         return lista;
     }
 
-    public String getProvincia() {
-        return provincia;
+    
+    
+    
+    public String getNomeDaProvincia() {
+        return nomeDaProvincia;
     }
 
-    public void setProvincia(String provincia) {
-        this.provincia = provincia;
+    public void setNomeDaProvincia(String nomeDaProvincia) {
+        this.nomeDaProvincia = nomeDaProvincia;
     }
 
     public Municipio getMunicipio() {
@@ -93,4 +100,17 @@ public class MunicipioBean {
         this.letrasNomeMunicipio = letrasNomeMunicipio;
     }
 
+    public Provincia getProvincia() {
+        return provincia;
+    }
+
+    public void setProvincia(Provincia provincia) {
+        this.provincia = provincia;
+    }
+    
+    
+    
+  public void listaMunicipiosDaProvincia(AjaxBehaviorEvent event){
+    municipios = dao.listaMunicipiosDaProvincia(provincia);
+    }
 }
